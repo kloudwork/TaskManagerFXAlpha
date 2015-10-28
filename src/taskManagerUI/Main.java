@@ -1,4 +1,4 @@
-package taskManagerUI;
+/* package taskManagerUI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -67,7 +67,7 @@ public class Main extends Application {
 }
 
 
-
+*/
 
 
 

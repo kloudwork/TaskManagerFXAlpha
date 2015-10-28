@@ -7,8 +7,6 @@ public class Menu {
     private TaskManager taskManager = new TaskManager();
     private Task choosenTask;
 
-    private int choosenTaskIndex;
-
     private boolean mainMenu = true;
     private boolean editMenu = false;
     private boolean isTaskChoosen = false;
@@ -56,27 +54,6 @@ public class Menu {
         this.isTaskChoosen = isTaskChoosen;
     }
 
-    public Task getChoosenTask() {
-        return choosenTask;
-    }
-
-    public void setChoosenTask(Task choosenTask) {
-        this.choosenTask = choosenTask;
-    }
-
-    public void setChoosenTaskIndex(int choosenTaskIndex) {
-        this.choosenTaskIndex = choosenTaskIndex;
-    }
-
-    public int getChoosenTaskIndex() {
-        return choosenTaskIndex;
-    }
-
-    public void setTaskIndex() {
-        setChoosenTaskIndex(taskManager.searchForTaskIndexInTaskStorage());
-    }
-
-
     // BUILDING MENU METHODS
 
     public void startMenu() {
@@ -96,7 +73,6 @@ public class Menu {
         taskManager.listTasks();
         choosenTask = taskManager.chooseTaskFromUserInput();
         setIsTaskChoosen(true);
-        setTaskIndex();
     }
 
     public void startEditingMenu() {
@@ -105,14 +81,14 @@ public class Menu {
         if (isTaskChoosen == false) {
             listingAndChoosingTask();
         }
-        if (taskManager.taskStorage.size() >= 1)
+        if (taskManager.getTaskStorage().size() >= 1)
             System.out.println("SELECTED TASK TO EDIT: \n" + choosenTask.toString() + "\n");
         System.out.println(EDIT_MENU);
         chooseEditMenuOption(taskManager.getUserInputToInteger());
     }
 
     public void taskStorageIsEmptyWarning() {
-        if (taskManager.taskStorage.size() < 1) {
+        if (taskManager.getTaskStorage().size() < 1) {
             System.out.println("There is no task! Add new task to edit something.");
             startMenu();
         }
@@ -127,10 +103,9 @@ public class Menu {
     // SETTING MENU STATES
 
     public void setMenuToMainMenu() {
-        editMenu = false;
-        mainMenu = true;
-        isTaskChoosen = false;
-        // TODO setmethods
+        setEditMenu(false);
+        setMainMenu(true);
+        setIsTaskChoosen(false);
     }
 
     public void setMenuToEditingMenu() {
@@ -142,6 +117,8 @@ public class Menu {
 
     public void chooseMainMenuOption(int command) {
 
+        taskStorageIsEmptyWarning();
+
         switch (command) {
             case 99:
                 // ADD 4 NEW DIFFERENT TASK
@@ -150,7 +127,6 @@ public class Menu {
             case 1:
                 // ADD NEW TASK
                 taskManager.createAndStoreNewTask();
-                System.out.println("\nYou have successfully added a new Task!");
                 break;
             case 2:
                 // EDIT A SPECIFIC TASK
@@ -179,28 +155,23 @@ public class Menu {
 
             case 1:
                 // DELETE TASK
-                taskStorageIsEmptyWarning();
                 taskManager.deleteTask(choosenTask);
                 break;
             case 2:
                 // RENAME TITLE
-                taskStorageIsEmptyWarning();
                 taskManager.renameTaskTitle(choosenTask);
                 break;
             case 3:
                 // RENAME DESCRIPTION
-                taskStorageIsEmptyWarning();
                 taskManager.renameTaskDescription(choosenTask);
                 break;
             case 4:
                 // ADD MORE TO DESCRIPTION
-                taskStorageIsEmptyWarning();
                 System.out.println("Add more text to description");
                 taskManager.addToTaskDescription(choosenTask,taskManager.getUserInput());
                 break;
             case 5:
                 // SET TASK TO DONE
-                taskStorageIsEmptyWarning();
                 choosenTask.setIsTaskDone(true);
                 System.out.println("You have successfully DONE with: " + choosenTask.getTaskTitle());
                 break;

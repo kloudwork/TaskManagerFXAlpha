@@ -1,4 +1,3 @@
-package taskmanagerSRC;/*
 package taskmanagerSRC;
 
 public class Application {
@@ -22,5 +21,4 @@ public class Application {
     }
 }
 
-*/
 

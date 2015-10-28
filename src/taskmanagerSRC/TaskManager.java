@@ -7,71 +7,57 @@ public class TaskManager {
 
     // INITIALS
 
-    ArrayList<Task> taskStorage = new ArrayList<>();
+
+    private ArrayList<Task> taskStorage = new ArrayList<>();
     Task choosenTask;
-    Task actualTask;
 
-
-    ///////////////////////// PLACE FOR TASK CATEGORY CODE /////////////////////////
-
-
-
-
-    ///////////////////////// PLACE FOR TASK CATEGORY CODE /////////////////////////
+    public ArrayList<Task> getTaskStorage() {
+        return taskStorage;
+    }
 
 
     // TASK METHODS
 
     public String getUserInput() {
+
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
         return userInput;
     }
 
     public int getUserInputToInteger() {
-        int i = Integer.parseInt(getUserInput());
-        return i;
+        return Integer.parseInt(getUserInput());
     }
 
     public void createAndStoreNewTask() {
         Task t = new Task(getTaskTitleFromUserInput(), getTaskDescriptionFromUserInput());
         taskStorage.add(t);
+        System.out.println("\nYou have successfully added a new Task!");
     }
 
 
     public Task chooseTaskFromUserInput() {
         System.out.println("Choose a task to EDIT (ID): \n");
-        choosenTask = getSpecificTaskFromUserInput();
-        return choosenTask;
-    }
-
-    public int searchForTaskIndexInTaskStorage() {
-        for(int i = 0; i < taskStorage.size(); ++i) {
-            if(taskStorage.get(i) == choosenTask)
-                return i;
-        }
-        return -1;
+        return getSpecificTaskFromUserInput();
     }
 
 
     public String getTaskTitleFromUserInput() {
 
         System.out.println("\nTask title: ");
-        String taskTitle = getUserInput();
-        return taskTitle;
+        return getUserInput();
     }
 
     public void listTasks() {
         System.out.println("Tasks: " + taskStorage.size());
         for (int i = 0; i < taskStorage.size();i++) {
-            actualTask = taskStorage.get(i);
-            System.out.println(actualTask);
+            taskStorage.get(i);
+            System.out.println(taskStorage.get(i));
         }
     }
 
     public Task getSpecificTaskFromUserInput() {
-        choosenTask = taskStorage.get(getUserInputToInteger());
-        return choosenTask;
+        return taskStorage.get(getUserInputToInteger());
     }
 
     public void deleteTask(Task choosenTask) {
@@ -98,17 +84,14 @@ public class TaskManager {
     public String getTaskDescriptionFromUserInput() {
 
         System.out.println("\nTask description: ");
-        String taskDescription = getUserInput();
-        return taskDescription;
+        return getUserInput();
     }
 
     public void renameTaskDescription(Task choosenTask) {
         this.choosenTask = choosenTask;
         String actualDescription = choosenTask.getTaskDescription();
-
         System.out.println("Actual description: " + actualDescription + "\n" + "Type new description for the choosenTask: ");
         String newDescription = getUserInput();
-
         choosenTask.setTaskDescription(newDescription); //TODO more memory efficient solution
         System.out.println("Your new description is: " + choosenTask.getTaskDescription());
     }
