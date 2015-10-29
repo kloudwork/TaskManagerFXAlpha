@@ -19,11 +19,15 @@ public class TaskManager {
     // TASK METHODS
 
     public String getUserInput() {
-
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
+        while (userInput.equals("")) {
+            System.out.println("You entered nothing. Try again: ");
+            userInput = input.nextLine();
+        }
         return userInput;
     }
+
 
     public int getUserInputToInteger() {
         return Integer.parseInt(getUserInput());
@@ -61,7 +65,6 @@ public class TaskManager {
     }
 
     public void deleteTask(Task choosenTask) {
-        this.choosenTask = choosenTask;
         System.out.println("\n\nYou deleted the following choosenTask: " + choosenTask.toString());
         taskStorage.remove(choosenTask);
     }
@@ -69,13 +72,9 @@ public class TaskManager {
     // TASK TITLE METHODS
 
     public void renameTaskTitle(Task choosenTask) {
-        this.choosenTask = choosenTask;
-        String actualTitle = choosenTask.getTaskTitle();
 
-        System.out.println("Actual title: " + actualTitle + "\n" + "Type new Title for the choosenTask: ");
-        String newTitle = getUserInput();
-
-        choosenTask.setTaskTitle(newTitle); //TODO more memory efficient solution
+        System.out.println("Actual title: " + choosenTask.getTaskTitle() + "\n" + "Type new Title for the choosenTask: ");
+        choosenTask.setTaskTitle(getUserInput()); //TODO more memory efficient solution
         System.out.println("Your new title is: " + choosenTask.getTaskTitle());
     }
 
@@ -88,14 +87,10 @@ public class TaskManager {
     }
 
     public void renameTaskDescription(Task choosenTask) {
-        this.choosenTask = choosenTask;
-        String actualDescription = choosenTask.getTaskDescription();
-        System.out.println("Actual description: " + actualDescription + "\n" + "Type new description for the choosenTask: ");
-        String newDescription = getUserInput();
-        choosenTask.setTaskDescription(newDescription); //TODO more memory efficient solution
+        System.out.println("Actual description: " + choosenTask.getTaskDescription() + "\n" + "Type new description for the choosenTask: ");
+        choosenTask.setTaskDescription(getUserInput()); //TODO more memory efficient solution
         System.out.println("Your new description is: " + choosenTask.getTaskDescription());
     }
-
 
     public void addToTaskDescription(Task choosenTask, String s) {
         this.choosenTask = choosenTask;

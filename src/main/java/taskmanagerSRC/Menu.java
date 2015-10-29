@@ -56,6 +56,7 @@ public class Menu {
 
     // BUILDING MENU METHODS
 
+
     public void startMenu() {
             if (mainMenu) {
                 startMainMenu();
@@ -96,8 +97,7 @@ public class Menu {
 
     public void clearScreen() {
         for(int clear = 0; clear < 100; clear++)
-        { System.out.println("\b") ;
-        }
+        { System.out.println("\b") ;}
     }
 
     // SETTING MENU STATES

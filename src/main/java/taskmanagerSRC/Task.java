@@ -5,20 +5,20 @@ public class Task {
     // INITIALS
 
     private Task task;
-    private TaskManager taskManager;
 
     private String taskTitle;
     private String taskDescription;
 
     private boolean isTaskDone;
     public static int ID_POOL;
-    private final int TASK_ID = ID_POOL;
+    private final int TASK_ID;
 
 
     public Task(String taskTitle, String taskDescription) {
         this.taskTitle = taskTitle;
         this.taskDescription = taskDescription;
         isTaskDone = false;
+        TASK_ID = ID_POOL;
         ID_POOL++;
     }
 
@@ -62,7 +62,7 @@ public class Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("---------------------------------------------------------------------------   \n");
-        sb.append("Task ID: " + TASK_ID); // crash with nullpointer exception
+        sb.append("Task ID: " + TASK_ID);
         sb.append(" | ");
         sb.append("Task title: " + getTaskTitle());
         sb.append(" | ");
